@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
 
-  <title>Get to 1000</title>
+  <title>Name those Numbers</title>
 
   <style>
     html {height: 100%; font-size: 24px;}
@@ -43,7 +43,7 @@
       line-height: 2em;
       font-size: 1em;
       text-align: center;
-      width: 2.5em;
+      width: 5em;
     }
     .tick {color:green;}
     .cross {color:red;}
@@ -61,7 +61,7 @@
     #cat-gif { flex-grow: 1 }
     
     #done button {
-      background-color: #c4bbbe;
+      background-color: #76a178;
       font-size: 0.75em;
       border: 0;
       border-radius: 10px;
@@ -72,33 +72,14 @@
 <body>
       <div class="game-area">
       <div id="initial-number" class="row"></div>
-  <div id="nearest-ten" class="row">
-    To round up to the nearest 10 add: <input type="number" max="10" min="0" step="1"/>
+  <div id="numerals" class="row">
+    In numerals this says: <input type="number" max="9999" min="0" step="1"/>
     <div class="mark-holder">
       <span class="tick" style="display: none;">✓</span>
       <span class="cross" style="display: none;">✘</span>
     </div>
   </div>
-  <div id="nearest-hundred" class="row" style="display: none;">
-    <div>That's <span class="start"></span></div>
-    <div>
-      To round up to the nearest 100 add: <input type="number" max="99" min="0" step="1"/>      
-      <div class="mark-holder">
-        <span class="tick" style="display: none;">✓</span>
-        <span class="cross" style="display: none;">✘</span>
-      </div>
-    </div>
-  </div>
-  <div id="nearest-thousand" class="row" style="display: none;">
-    <div>That's <span class="start"></span></div>
-    <div>
-      To round up to 1000 add: <input type="number" max="99" min="0" step="1"/>     
-      <div class="mark-holder">
-        <span class="tick" style="display: none;">✓</span>
-        <span class="cross" style="display: none;">✘</span>
-      </div>
-    </div>
-  </div>
+
   <div id="done" class="row" style="display: none;">
     <div class="result done-row">
       
