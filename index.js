@@ -126,7 +126,7 @@ const showDoneButton = (numerals, words) => function () {
 const showWordToHuman = words => {
   const initialRow = document.getElementById("initial-number");
   initialRow.style.display = "";
-  initialRow.innerHTML = 'Your starting number is ' + words;
+  initialRow.innerHTML = 'Your number is ' + words;
 };
 
 const setupPage = () => {
