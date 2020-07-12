@@ -1,5 +1,6 @@
 const dom = require('./dom')
 const convert = require('./convert')
+const catGifs = require('./cat-gifs')
 
 const setupRow = (expectedNumeral, onCorrect) => {
   const row = document.getElementById("numerals");
@@ -18,35 +19,13 @@ const setupRow = (expectedNumeral, onCorrect) => {
   });
 };
 
-let nextImage;
-const preloadNextCatUrl = () => {
-
-  let catGifUrl = "https://thecatapi.com/api/images/get?format=src&type=gif";
-  catGifUrl += "&cacheBuster=" + new Date().getTime();
-
-  const i = new Image();
-  i.style.width = '100%';
-  i.onload = function () {
-    console.log(catGifUrl, 'preloaded!')
-    nextImage = i;
-
-  }
-  i.src = catGifUrl;
-};
-
-const addCatImage = () => {
-  const theGif = document.getElementById("cat-gif");
-  theGif.innerHTML = '';
-  theGif.appendChild(nextImage);
-};
-
 const showDoneButton = (numerals, words) => function () {
   dom.hide("#numerals", document);
   dom.hide("#initial-number", document)
   const buttonHolder = document.getElementById("done");
   buttonHolder.querySelectorAll(".result")[0].innerHTML = words + " says " + numerals;
   buttonHolder.querySelectorAll("button")[0].innerHTML = "Awesome work! Again?";
-  addCatImage();
+  catGifs.addCatImage(document.getElementById("cat-gif"));
   dom.show('#done', document)
 };
 
@@ -57,7 +36,7 @@ const showWordToHuman = words => {
 };
 
 const setupPage = () => {
-  preloadNextCatUrl();
+  catGifs.preloadNextCatGif();
 
   const numerals = (Math.floor(Math.random() * 999) + 1);
   const words = convert.numeralsToWords(numerals);
