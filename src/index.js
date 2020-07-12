@@ -36,8 +36,6 @@ const showWordToHuman = words => {
 };
 
 const setupPage = () => {
-  catGifs.preloadNextCatGif();
-
   const numerals = (Math.floor(Math.random() * 999) + 1);
   const words = convert.numeralsToWords(numerals);
 
@@ -52,5 +50,5 @@ const setupPage = () => {
 };
 
 document.getElementById("done").addEventListener("click", setupPage);
-
+catGifs.preloadNextCatGif();
 setupPage();

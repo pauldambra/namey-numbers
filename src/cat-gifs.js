@@ -1,4 +1,4 @@
-let catGifUrl = "https://thecatapi.com/api/images/get?format=src&type=gif";
+let catGifUrl = "https://api.thecatapi.com/api/images/get?format=src&type=gif";
 let nextImage;
 let preload
 
@@ -23,9 +23,16 @@ const preloadNextCatGif = () => {
 };
 
 const addCatImage = (jsElement) => {
+  if (!preload) {
+    preloadNextCatGif()
+  }
+
   preload.then(() => {
     jsElement.innerHTML = '';
     jsElement.appendChild(nextImage);
+  }).then(() => {
+    preload = null;
+    preloadNextCatGif();
   })
 };
 
