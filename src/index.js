@@ -1,9 +1,11 @@
+const dom = require('./dom')
+
 const setupRow = (expectedNumeral, onCorrect) => {
   const row = document.getElementById("numerals");
 
   const theInput = row.querySelectorAll("input")[0];
   theInput.focus();
-  theInput.addEventListener('input', function (e) {
+  theInput.addEventListener('input', function () {
     const answer = parseInt(this.value, 10);
     const answerCorrect = answer === expectedNumeral;
     row.querySelectorAll(".tick")[0].style.display = answerCorrect ? "" : "none";
@@ -13,27 +15,6 @@ const setupRow = (expectedNumeral, onCorrect) => {
       setTimeout(onCorrect, 500)
     }
   });
-};
-
-const hide = selector => {
-  const nodes = document.querySelectorAll(selector);
-  for (let i = 0; i < nodes.length; i++) {
-    nodes[i].style.display = "none";
-  }
-};
-
-const show = selector => {
-  const nodes = document.querySelectorAll(selector);
-  for (let i = 0; i < nodes.length; i++) {
-    nodes[i].style.display = "";
-  }
-};
-
-const resetAllInputs = () => {
-  const nodes = document.querySelectorAll("input");
-  for (let i = 0; i < nodes.length; i++) {
-    nodes[i].value = "";
-  }
 };
 
 let nextImage;
@@ -114,13 +95,13 @@ const numToWords = n => {
 };
 
 const showDoneButton = (numerals, words) => function () {
-  hide("#numerals");
-  hide("#initial-number")
+  dom.hide("#numerals", document);
+  dom.hide("#initial-number", document)
   const buttonHolder = document.getElementById("done");
   buttonHolder.querySelectorAll(".result")[0].innerHTML = words + " says " + numerals;
   buttonHolder.querySelectorAll("button")[0].innerHTML = "Awesome work! Again?";
   addCatImage();
-  show('#done')
+  dom.show('#done', document)
 };
 
 const showWordToHuman = words => {
@@ -135,10 +116,10 @@ const setupPage = () => {
   const numerals = (Math.floor(Math.random() * 999) + 1);
   const words = numToWords(numerals);
 
-  show("#numerals");
-  hide(".mark-holder span");
-  hide("#done");
-  resetAllInputs();
+  dom.show("#numerals", document);
+  dom.hide(".mark-holder span", document);
+  dom.hide("#done", document);
+  dom.resetAllInputs(document);
 
   showWordToHuman(words);
 
