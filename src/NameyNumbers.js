@@ -1,68 +1,74 @@
-import React from "react";
-import * as question from "./question/question";
-import * as catGifs from "./onSuccess/cat-gifs";
+import React from 'react'
+import * as question from './question/question'
+import * as catGifs from './onSuccess/cat-gifs'
 
 const NameyNumbers = () => {
-  const [answer, setAnswer] = React.useState("")
+  const [answer, setAnswer] = React.useState('')
   const [answerIsCorrect, setAnswerIsCorrect] = React.useState(null)
   const [q, setQuestion] = React.useState(question.read())
 
-  React.useEffect(() => {
-    catGifs.addCatImage(document.getElementById("cat-gif"))
-  }, [q]);
+  React.useLayoutEffect(() => {
+    catGifs.addCatImage(document.getElementById('cat-gif'))
+  }, [q])
 
   const handleChange = event => {
-    const inputValue = event.target.value;
-    const providedAnswer = parseInt(inputValue, 10);
+    const inputValue = event.target.value
     setAnswer(inputValue)
-    const isCorrect = question.checkAnswer(providedAnswer);
+    const providedAnswer = parseInt(inputValue, 10)
+    const isCorrect = question.checkAnswer(providedAnswer)
     setAnswerIsCorrect(isCorrect)
-  };
+  }
 
   const showWhenCorrect = () =>
-    answerIsCorrect == null || !answerIsCorrect ? "none" : "";
+    answerIsCorrect == null || !answerIsCorrect ? 'none' : ''
 
   const hideWhenCorrect = () =>
-    answerIsCorrect == null || !answerIsCorrect ? "" : "none"
+    answerIsCorrect == null || !answerIsCorrect ? '' : 'none'
 
   const showWhenWrong = () =>
-    answerIsCorrect == null || answerIsCorrect ? "none" : "";
+    answerIsCorrect == null || answerIsCorrect ? 'none' : ''
 
   const resetPage = () => {
     const newQuestion = question.triggerNext()
     setQuestion(newQuestion)
-    setAnswer("")
+    setAnswer('')
     setAnswerIsCorrect(null)
   }
 
-  return <div>
-    <div id="question-row" className="row" style={{display: hideWhenCorrect()}}>
-      Your number is {question.read().words}
-    </div>
-    <div id="answer-row" className="row" style={{display: hideWhenCorrect()}}>
-      In numerals this says: <input
-        type="number" max="9999" min="0" step="1"
-        value={answer} onChange={handleChange}
-      />
-      <div className="mark-holder">
-        <span className="tick" style={{display: showWhenCorrect()}}>✓</span>
-        <span className="cross" style={{display: showWhenWrong()}}>✘</span>
+  return (
+    <div>
+      <div
+        id='question-row' className='row'
+        style={{ display: hideWhenCorrect() }}
+      >
+        Your number is {question.read().words}
       </div>
-    </div>
-    <div id="done" className="row" style={{display: showWhenCorrect()}}>
-      <div className="result done-row">
-        Yes! {question.read().words} says {question.read().numerals}
+      <div
+        id='answer-row' className='row'
+        style={{ display: hideWhenCorrect() }}
+      >
+        In numerals this says:
+        <input
+          type='number' max='9999' min='0' step='1'
+          value={answer} onChange={handleChange}
+        />
+        <div className='mark-holder'>
+          <span className='tick' style={{ display: showWhenCorrect() }}>✓</span>
+          <span className='cross' style={{ display: showWhenWrong() }}>✘</span>
+        </div>
       </div>
-      <div className="done-row">
-        <button onClick={resetPage}>
-          Awesome, Again?
-        </button>
+      <div id='done' className='row' style={{ display: showWhenCorrect() }}>
+        <div className='result done-row'>
+          Yes! {question.read().words} says {question.read().numerals}
+        </div>
+        <div className='done-row'>
+          <button onClick={resetPage}>
+            Awesome, Again?
+          </button>
+        </div>
+        <div id='cat-gif' className='done-row' />
       </div>
-      <div id="cat-gif" className="done-row">
-
-      </div>
-    </div>
-  </div>
+    </div>)
 }
 
-export default NameyNumbers;
+export default NameyNumbers
