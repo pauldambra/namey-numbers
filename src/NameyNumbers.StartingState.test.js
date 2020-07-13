@@ -4,7 +4,7 @@ import NameyNumbers from './NameyNumbers'
 import {
   toHaveStyle, toHaveAttribute
 } from '@testing-library/jest-dom/matchers'
-import * as question from './question/question'
+import * as question from './question'
 
 import { describe, expect, it } from '@jest/globals'
 expect.extend({ toHaveStyle, toHaveAttribute })

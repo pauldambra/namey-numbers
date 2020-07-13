@@ -1,4 +1,4 @@
-import { numeralsToWords } from '../convert'
+import { numeralsToWords } from './convert'
 
 const nextRandom = () => Math.floor(Math.random() * 999) + 1
 

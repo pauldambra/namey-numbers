@@ -1,17 +1,17 @@
 import React from 'react'
 import { act, render } from '@testing-library/react'
 import NameyNumbers from './NameyNumbers'
-import * as question from './question/question'
+import * as question from './question'
 import { fireEvent } from '@testing-library/dom'
-import { describe, expect, it } from '@jest/globals'
+import { describe, expect, it, jest, beforeAll, beforeEach } from '@jest/globals'
 
 import {
   toHaveStyle, toHaveAttribute
 } from '@testing-library/jest-dom/matchers'
 
-expect.extend({ toHaveStyle, toHaveAttribute })
+import * as catGifs from './cat-gifs'
 
-import * as catGifs from "./onSuccess/cat-gifs"
+expect.extend({ toHaveStyle, toHaveAttribute })
 
 describe('namey numbers success state', function () {
   let addCatImageSpy
@@ -19,16 +19,16 @@ describe('namey numbers success state', function () {
   let container
 
   beforeAll(() => {
-    addCatImageSpy = jest.spyOn(catGifs, "addCatImage")
+    addCatImageSpy = jest.spyOn(catGifs, 'addCatImage')
       .mockImplementation((element) => {
         const img = document.createElement('img')
-        img.src = "my test url"
+        img.src = 'my test url'
         element.appendChild(img)
-    })
+      })
 
-    jest.spyOn(question, "read").mockImplementation(() => {
-      return  {
-        words: "twelve",
+    jest.spyOn(question, 'read').mockImplementation(() => {
+      return {
+        words: 'twelve',
         numerals: 12
       }
     })
@@ -36,7 +36,7 @@ describe('namey numbers success state', function () {
 
   beforeEach(() => {
     act(() => {
-      ({ container } = render(<NameyNumbers/>))
+      ({ container } = render(<NameyNumbers />))
 
       const input = container.querySelector('#answer-row input')
       expectedQuestion = question.read()
@@ -46,7 +46,7 @@ describe('namey numbers success state', function () {
     })
   })
 
-  it("calls for a cat image twice once on render and once after correct answer", function () {
+  it('calls for a cat image twice once on render and once after correct answer', function () {
     expect(addCatImageSpy).toHaveBeenCalledTimes(2)
   })
 
@@ -76,7 +76,7 @@ describe('namey numbers success state', function () {
     const tick = container.querySelector('.tick')
     const cross = container.querySelector('.cross')
     const catGif = container.querySelector('#cat-gif')
-    const catGifImg = catGif.querySelector("img")
+    const catGifImg = catGif.querySelector('img')
 
     expect(questionRow).not.toHaveStyle('display: none')
     expect(answerRow).not.toHaveStyle('display: none')

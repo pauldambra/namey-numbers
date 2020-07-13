@@ -1,6 +1,6 @@
 import React from 'react'
-import * as question from './question/question'
-import * as catGifs from './onSuccess/cat-gifs'
+import * as question from './question'
+import * as catGifs from './cat-gifs'
 
 const NameyNumbers = () => {
   const [answer, setAnswer] = React.useState('')
