@@ -66,7 +66,9 @@ const NameyNumbers = () => {
             Awesome, Again?
           </button>
         </div>
-        <div id='cat-gif' className='done-row' />
+        <div id='cat-gif' className='done-row'>
+          Loading...
+        </div>
       </div>
     </div>)
 }
