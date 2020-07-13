@@ -1,9 +1,10 @@
 let catGifUrl = "https://api.thecatapi.com/api/images/get?format=src&type=gif";
+let nextUrl;
 let nextImage;
 let preload
 
-const preloadNextCatGif = () => {
-  preload = new Promise(((resolve, reject) => {
+export const preloadNextCatGif = () => {
+  preload = new Promise((resolve, reject) => {
     catGifUrl += "&cacheBuster=" + new Date().getTime();
 
     const image = new Image();
@@ -11,18 +12,19 @@ const preloadNextCatGif = () => {
     image.onload = function () {
       console.log(catGifUrl, 'preloaded!')
       nextImage = image;
+      nextUrl = nextImage.src
       resolve();
     }
     image.onerror = function (e) {
       reject(e)
     }
     image.src = catGifUrl;
-  }))
+  })
 
 
 };
 
-const addCatImage = (jsElement) => {
+export const addCatImage = (jsElement) => {
   if (!preload) {
     preloadNextCatGif()
   }
@@ -36,4 +38,12 @@ const addCatImage = (jsElement) => {
   })
 };
 
-module.exports = { addCatImage, preloadNextCatGif }
+export const nextCatGifUrl = () => {
+  if (!preload) {
+    preloadNextCatGif()
+  }
+  return preload.then(() => {
+    preload = null;
+    return nextUrl
+  })
+}

@@ -55,6 +55,6 @@ const numToWords = n => {
       .join(' ');
 };
 
-module.exports = {
+export default {
   numeralsToWords: numToWords
-}
+};

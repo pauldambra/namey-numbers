@@ -14,9 +14,21 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.tsx?$/,
-        use: 'ts-loader',
+        test: /\.(js|jsx)$/,
         exclude: /node_modules/,
+        use: {
+          loader: "babel-loader"
+        }
+      },
+      {
+        test: /\.html$/,
+        use: {
+          loader: 'prerender-loader?string',
+          options: {
+            string: true,
+            entry: `./src/index.js`,
+          },
+        }
       },
     ],
   },
@@ -42,6 +54,5 @@ module.exports = {
   devServer: {
     contentBase: path.join(__dirname, 'docs'),
     compress: true,
-    port: 9000
   }
 }
