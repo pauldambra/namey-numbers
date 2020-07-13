@@ -1,10 +1,10 @@
 import React from 'react'
 import { render } from '@testing-library/react'
-import NameyNumbers from './NameyNumbers'
+import NameyNumbers from '../src/NameyNumbers'
 import {
   toHaveStyle, toHaveAttribute
 } from '@testing-library/jest-dom/matchers'
-import * as question from './question'
+import * as question from '../src/question'
 import { fireEvent } from '@testing-library/dom'
 
 import { describe, expect, it } from '@jest/globals'
@@ -20,25 +20,9 @@ describe('namey numbers entering answers', function () {
 
     fireEvent.change(input, { target: { value: incorrectAnswer } })
 
-    const tick = container.querySelector('.tick')
     const cross = container.querySelector('.cross')
 
-    expect(tick).toHaveStyle('display: none')
     expect(cross).not.toHaveStyle('display: none')
-  })
-
-  it('shows tick if correct answer entered', function () {
-    const { container } = render(<NameyNumbers />)
-
-    const tick = container.querySelector('.tick')
-    const cross = container.querySelector('.cross')
-
-    const input = container.querySelector('#answer-row input')
-    const correctAnswer = question.read().numerals
-    fireEvent.change(input, { target: { value: correctAnswer } })
-
-    expect(tick).not.toHaveStyle('display: none')
-    expect(cross).toHaveStyle('display: none')
   })
 
   it('shows success view on correct answer', function () {

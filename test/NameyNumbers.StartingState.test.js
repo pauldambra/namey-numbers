@@ -1,10 +1,10 @@
 import React from 'react'
 import { render } from '@testing-library/react'
-import NameyNumbers from './NameyNumbers'
+import NameyNumbers from '../src/NameyNumbers'
 import {
   toHaveStyle, toHaveAttribute
 } from '@testing-library/jest-dom/matchers'
-import * as question from './question'
+import * as question from '../src/question'
 
 import { describe, expect, it } from '@jest/globals'
 expect.extend({ toHaveStyle, toHaveAttribute })
@@ -30,13 +30,11 @@ describe('namey numbers starting state', function () {
     expect(answerRow).not.toHaveStyle('display: none')
   })
 
-  it('starts with tick and cross hidden', function () {
+  it('starts with cross hidden', function () {
     const { container } = render(<NameyNumbers />)
 
-    const tick = container.querySelector('.tick')
     const cross = container.querySelector('.cross')
 
-    expect(tick).toHaveStyle('display: none')
     expect(cross).toHaveStyle('display: none')
   })
 

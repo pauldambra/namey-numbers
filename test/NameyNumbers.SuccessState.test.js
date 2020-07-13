@@ -1,7 +1,7 @@
 import React from 'react'
 import { act, render } from '@testing-library/react'
-import NameyNumbers from './NameyNumbers'
-import * as question from './question'
+import NameyNumbers from '../src/NameyNumbers'
+import * as question from '../src/question'
 import { fireEvent } from '@testing-library/dom'
 import { describe, expect, it, jest, beforeAll, beforeEach } from '@jest/globals'
 
@@ -9,7 +9,7 @@ import {
   toHaveStyle, toHaveAttribute
 } from '@testing-library/jest-dom/matchers'
 
-import * as catGifs from './cat-gifs'
+import * as catGifs from '../src/cat-gifs'
 
 expect.extend({ toHaveStyle, toHaveAttribute })
 
@@ -26,12 +26,6 @@ describe('namey numbers success state', function () {
         element.appendChild(img)
       })
 
-    jest.spyOn(question, 'read').mockImplementation(() => {
-      return {
-        words: 'twelve',
-        numerals: 12
-      }
-    })
   })
 
   beforeEach(() => {
@@ -43,6 +37,8 @@ describe('namey numbers success state', function () {
       const correctAnswer = expectedQuestion.numerals
       fireEvent.change(input, { target: { value: correctAnswer } })
       fireEvent.click(container.querySelector('#done button'))
+
+      expectedQuestion = question.read() // get newly updated question
     })
   })
 
@@ -73,7 +69,6 @@ describe('namey numbers success state', function () {
     const questionRow = container.querySelector('#question-row')
     const answerRow = container.querySelector('#answer-row')
     const done = container.querySelector('#done')
-    const tick = container.querySelector('.tick')
     const cross = container.querySelector('.cross')
     const catGif = container.querySelector('#cat-gif')
     const catGifImg = catGif.querySelector('img')
@@ -81,7 +76,6 @@ describe('namey numbers success state', function () {
     expect(questionRow).not.toHaveStyle('display: none')
     expect(answerRow).not.toHaveStyle('display: none')
     expect(done).toHaveStyle('display: none')
-    expect(tick).toHaveStyle('display: none')
     expect(cross).toHaveStyle('display: none')
     expect(catGifImg).not.toBeNull()
     expect(catGifImg).toHaveAttribute('src', 'my test url')

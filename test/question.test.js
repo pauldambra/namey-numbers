@@ -1,4 +1,4 @@
-import * as question from './question'
+import * as question from '../src/question'
 import { describe, expect, it } from '@jest/globals'
 
 describe('a question', function () {

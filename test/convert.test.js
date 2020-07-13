@@ -1,5 +1,5 @@
 import { describe, expect, it } from '@jest/globals'
-import { numeralsToWords } from './convert'
+import { numeralsToWords } from '../src/convert'
 
 describe('converting from numerals to words', () => {
   [
