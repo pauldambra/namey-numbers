@@ -3,12 +3,11 @@ let nextUrl;
 let nextImage;
 let preload
 
-export const preloadNextCatGif = () => {
+const preloadNextCatGif = () => {
   preload = new Promise((resolve, reject) => {
     catGifUrl += "&cacheBuster=" + new Date().getTime();
 
     const image = new Image();
-    image.style.width = '100%';
     image.onload = function () {
       console.log(catGifUrl, 'preloaded!')
       nextImage = image;
@@ -20,8 +19,6 @@ export const preloadNextCatGif = () => {
     }
     image.src = catGifUrl;
   })
-
-
 };
 
 export const addCatImage = (jsElement) => {
@@ -38,12 +35,3 @@ export const addCatImage = (jsElement) => {
   })
 };
 
-export const nextCatGifUrl = () => {
-  if (!preload) {
-    preloadNextCatGif()
-  }
-  return preload.then(() => {
-    preload = null;
-    return nextUrl
-  })
-}

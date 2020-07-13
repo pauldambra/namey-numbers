@@ -8,6 +8,7 @@ let words = convert.numeralsToWords(numerals);
 export const triggerNext = () => {
   numerals = nextRandom();
   words = convert.numeralsToWords(numerals);
+  return read()
 }
 
 export const checkAnswer = (a) => a === numerals
